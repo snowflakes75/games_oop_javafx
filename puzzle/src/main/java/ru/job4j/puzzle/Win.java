@@ -23,12 +23,23 @@ public class Win {
         return result;
     }
 
+    public static int[] extractDiagonal(int[][] board) {
+        int[] rsl = new int[board.length];
+        for (int i = 0; i < rsl.length; i++) {
+            rsl[i] = board[i][i];
+        }
+        return rsl;
+    }
+
     public static boolean check(int[][] board) {
         boolean result = false;
-        for (int i = 0; i < board.length; i++) {
-            if (monoHorizontal(board, i) || monoVertical(board, i)) {
-                result = true;
-                break;
+        int[] diagonalBoard = extractDiagonal(board);
+        for (int i = 0; i < diagonalBoard.length; i++) {
+            if (diagonalBoard[i] == 1) {
+                if (monoHorizontal(board, i) || monoVertical(board, i)) {
+                    result = true;
+                    break;
+                }
             }
         }
         return result;
